@@ -10,12 +10,16 @@ let col;
 
 function mousePressed() {
   [row, col] = getField();
-  board = setField(board, row, col, currentPlayer);
-  currentPlayer = switchTurn(currentPlayer);
+  if (row != null && col!= null) {
+    board = setField(board, row, col, currentPlayer);
+    currentPlayer = switchTurn(currentPlayer);
+  }
   msg = findWinner(board);
   if (IsBoardFull(board) && !msg) {
     msg = 'Game Over';
   }
+  row = null;
+  col = null;
 }
 let restartbutton;
 function restart() {
@@ -25,8 +29,6 @@ function restart() {
     []
   ];
   msg = null;
-  row = null;
-  col = null;
   setup()
 }
 
@@ -40,7 +42,7 @@ function setup() {
 
 function draw() {
   if (msg) {
-    background(255);
+    //background(255);
     textSize(35);
     text(msg, 30, 200);
     fill(0, 102, 153);
